@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.0/axios.min.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div>
+        <div style="margin-top: 50px; margin-left: 200px;">
+            <form action="/" method="POST">
+                <input type="text" name="id" id="id" placeholder="Nhập id">
+                <input type="text" name="tenBaiBao" id="tenBaiBao" placeholder="Nhập tên bài báo">
+                <input type="text" name="tacGia" id="tacGia" placeholder="Nhập tac gia">
+                <input type="text" name="isbn" id="isbn" placeholder="Nhập isbn">
+                <input type="text" name="soTrang" id="soTrang" placeholder="Nhập so trang">
+                <input type="text" name="namxb" id="namxb" placeholder="Nhập nam xb">
+                <Button type="submit" id="add">Thêm mới</Button>
+                <button type="submit" id="update">Update</button>
+            </form>
+        </div>
+        <div style="margin-left: 300px;">
+            <table class="table" border="1">
+                <tr style="background-color: darkgray;">
+                    <th>STT</th>
+                    <th>Tên bài báo</th>
+                    <th>Tác giả</th>
+                    <th>ISBN</th>
+                    <th>Số Trang</th>
+                    <th>Năm XB</th>
+                    <th colspan="2">Action</th>
+                </tr>
+                {{#each data}}
+                <tr>
+                    <td>{{@index}}</td>
+                    <td>{{tenBaiBao}}</td>
+                    <td>{{tacGia}}</td>
+                    <td>{{isbn}}</td>
+                    <td>{{soTrang}}</td>
+                    <td>{{namxb}}</td>
+                    <td>
+                        <form action="/delete" method="POST" enctype="multipart/form-data">
+                            <input type="hidden" name="id" value="{{id}}">
+                            <input type="submit" value="Delete">
+                        </form>
+                    </td>
+                    <td>
+                        <input type="submit" value="Select Update" onclick="edit({{id}})" href="javascript:void(0)">
+                    </td>
+                </tr>
+                {{/each}}
+            </table>
+        </div>
+    </div>
+    <script>
+        const id = document.getElementById('id');
+        const tenBaiBao = document.getElementById('tenBaiBao');
+        const tacGia = document.getElementById('tacGia');
+        const isbn = document.getElementById('isbn');
+        const soTrang = document.getElementById('soTrang');
+        const namxb = document.getElementById('namxb');
+        const add = document.getElementById('add');
+        const update = document.getElementById('update');
+
+        const edit = (id1) => {
+            add.style.display = "none"
+            update.style.display = "block"
+            id.style.display = "none"
+            axios({
+                method: 'get',
+                url: `/paper/${id1}`
+            }).then(d => {
+                id.value = d.data.id
+                tenBaiBao.value = d.data.tenBaiBao
+                tacGia.value = d.data.tacGia
+                isbn.value = d.data.isbn
+                soTrang.value = d.data.soTrang
+                namxb.value = d.data.namxb
+            }).catch(e => {
+
+            })
+        }
+    </script>
+</body>
+
+</html>
