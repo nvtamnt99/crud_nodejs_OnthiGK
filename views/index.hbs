@@ -11,6 +11,8 @@
 
 <body>
     <div>
+
+        <h1 style="margin-top: 50px; margin-left: 20px;">Nguyễn Văn Tâm</h1>
         <div style="margin-top: 50px; margin-left: 200px;">
             <form action="/" method="POST">
                 <input type="text" name="id" id="id" placeholder="Nhập id">
@@ -19,11 +21,12 @@
                 <input type="text" name="isbn" id="isbn" placeholder="Nhập isbn">
                 <input type="text" name="soTrang" id="soTrang" placeholder="Nhập so trang">
                 <input type="text" name="namxb" id="namxb" placeholder="Nhập nam xb">
-                <Button type="submit" id="add">Thêm mới</Button>
-                <button type="submit" id="update">Update</button>
+                <Button type="submit" id="add" style="border-radius: 1rem; Background-color: rgb(141, 252, 189)">Thêm mới</Button>
+                <button type="submit" id="update" style="border-radius: 1rem;Background-color: rgb(124, 176, 253)">Update</button>
             </form>
         </div>
-        <div style="margin-left: 300px;">
+         <h2 style="text-align: center;">Danh sách các bài báo</h2>
+        <div style="margin-left: 420px; margin-top: 20px;">
             <table class="table" border="1">
                 <tr style="background-color: darkgray;">
                     <th>STT</th>
@@ -45,11 +48,11 @@
                     <td>
                         <form action="/delete" method="POST" enctype="multipart/form-data">
                             <input type="hidden" name="id" value="{{id}}">
-                            <input type="submit" value="Delete">
+                            <input type="submit" value="Delete" style="Background-color: rgb(243, 127, 143)">
                         </form>
                     </td>
                     <td>
-                        <input type="submit" value="Select Update" onclick="edit({{id}})">
+                        <input type="submit" value="Select Update" onclick="edit({{id}})" style="Background-color: rgb(124, 176, 253)">
                     </td>
                 </tr>
                 {{/each}}
